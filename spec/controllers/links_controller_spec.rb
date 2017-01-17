@@ -30,6 +30,11 @@ RSpec.describe LinksController, type: :controller do
       expect(response).to render_template(:new)
     end
 
+    it "sholdn't create a new link due to invalid link" do
+      post :create, params: {link: {original: 'hello world'}}
+      expect(response).to render_template(:new)
+    end
+
     it "should destroy link" do
       link = Link.create!(original: 'http://google.com', user: subject.current_user)
       delete :destroy, params: {id: link.id}

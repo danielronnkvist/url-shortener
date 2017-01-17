@@ -1,6 +1,7 @@
 class Link < ApplicationRecord
   belongs_to :user
-  validates :original, :user_id, presence: true
+  validates :user_id, presence: true
+  validates :original, presence: true, url: true
   validates :shortened, uniqueness: true
   before_validation :generate_shortened, on: :create
 
