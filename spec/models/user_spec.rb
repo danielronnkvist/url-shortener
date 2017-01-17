@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "handle a users links" do
-    before(:all) do
+    before(:each) do
       @user = create(:user)
     end
 
@@ -25,6 +25,12 @@ RSpec.describe User, type: :model do
 
     it "should be able to have many links" do
       expect(@user.links.count).to eq(5)
+    end
+
+    it "should delete the users links when the user is destroyed" do
+      link = Link.create(original: 'test.com', user: @user)
+      @user.destroy!
+      expect{Link.find(link.id)}.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
