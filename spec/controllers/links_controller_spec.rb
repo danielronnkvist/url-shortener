@@ -20,4 +20,16 @@ RSpec.describe LinksController, type: :controller do
     get :index
     expect(response).to redirect_to(new_user_session_path)
   end
+
+  it "should redirect to links original url" do
+    user = FactoryGirl.create(:user)
+    link = Link.create!(original: 'http://google.com', user: user)
+    get :redirect, params: {shortened: link.shortened}
+    expect(response).to redirect_to('http://google.com')
+  end
+
+  it "should redirect to root path since no link was found" do
+    get :redirect, params: {shortened: 'åäö'}
+    expect(response).to redirect_to(root_path)
+  end
 end
