@@ -2,7 +2,7 @@ class Link < ApplicationRecord
   belongs_to :user
   validates :original, :user_id, presence: true
   validates :shortened, uniqueness: true
-  before_create :generate_shortened
+  before_validation :generate_shortened, on: :create
 
   private
 
