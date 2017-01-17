@@ -9,6 +9,16 @@ class LinksController < ApplicationController
     @link = Link.new
   end
 
+  def create
+    link = Link.new(link_params)
+    link.user = current_user
+    if link.save
+      redirect_to links_path, notice: 'Succesfully created link'
+    else
+      render :new, notice: 'There was an error creating your link...'
+    end
+  end
+
   def redirect
     @link = Link.find_by(shortened: params[:shortened])
     if @link
@@ -16,5 +26,11 @@ class LinksController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  private
+
+  def link_params
+    params.require(:link).permit(:original)
   end
 end

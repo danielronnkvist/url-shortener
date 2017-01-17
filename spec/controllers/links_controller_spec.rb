@@ -19,6 +19,16 @@ RSpec.describe LinksController, type: :controller do
       get :new
       expect(assigns(:link)).to be_a(Link)
     end
+
+    it "should create a new link" do
+      post :create, params: {link: {original: 'http://google.com'}}
+      expect(response).to redirect_to(links_path)
+    end
+
+    it "sholdn't create a new link due to no original" do
+      post :create, params: {link: {original: nil}}
+      expect(response).to render_template(:new)
+    end
   end
 
   it "shouldn't be able to visit without being signed in" do
