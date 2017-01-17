@@ -6,4 +6,12 @@ RSpec.describe PagesController, type: :controller do
         controller: "pages",
         action: "home")
   end
+
+  it "should redirect to links if signed in" do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    user = FactoryGirl.create(:user)
+    sign_in user
+    get :home
+    expect(response).to redirect_to(links_path)
+  end
 end
