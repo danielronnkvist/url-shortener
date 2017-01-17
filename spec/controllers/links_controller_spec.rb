@@ -14,6 +14,11 @@ RSpec.describe LinksController, type: :controller do
         expect(assigns(:links)).to eq(subject.current_user.links)
       end
     end
+
+    it "should assign a new Link" do
+      get :new
+      expect(assigns(:link)).to be_a(Link)
+    end
   end
 
   it "shouldn't be able to visit without being signed in" do

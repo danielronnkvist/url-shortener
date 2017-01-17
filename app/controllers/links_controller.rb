@@ -1,8 +1,12 @@
 class LinksController < ApplicationController
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!, except: :redirect
 
   def index
     @links = current_user.links
+  end
+
+  def new
+    @link = Link.new
   end
 
   def redirect
