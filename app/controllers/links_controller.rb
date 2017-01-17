@@ -19,6 +19,12 @@ class LinksController < ApplicationController
     end
   end
 
+  def destroy
+    link = Link.find(params[:id])
+    link.destroy
+    redirect_to links_path
+  end
+
   def redirect
     @link = Link.find_by(shortened: params[:shortened])
     if @link

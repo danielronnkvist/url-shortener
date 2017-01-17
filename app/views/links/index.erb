@@ -1,4 +1,4 @@
 <%= link_to 'Create a new link', new_link_path %>
 <ul>
-  <% @links.each do |link| %><li><%= link.original %></li><% end %>
+  <% @links.each do |link| %><li><%= link.original %> | <%= root_url + link.shortened %> | <%= link_to 'x', delete_link_path(link), method: :delete %></li><% end %>
 </ul>

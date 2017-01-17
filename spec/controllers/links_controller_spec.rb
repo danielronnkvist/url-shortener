@@ -29,6 +29,12 @@ RSpec.describe LinksController, type: :controller do
       post :create, params: {link: {original: nil}}
       expect(response).to render_template(:new)
     end
+
+    it "should destroy link" do
+      link = Link.create!(original: 'http://google.com', user: subject.current_user)
+      delete :destroy, params: {id: link.id}
+      expect{Link.find(link.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   it "shouldn't be able to visit without being signed in" do
