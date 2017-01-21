@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.links-table {
+  margin-top: 2em;
+
+  thead {
+    font-weight: bold;
+  }
+
+  td {
+    padding-right: 1em;
+
+    &:nth-last-child {
+      padding-right: 0;
+    }
+  }
+}
