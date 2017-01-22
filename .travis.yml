@@ -2,6 +2,8 @@ language: ruby
 rvm:
 - 2.4.0
 bundler_args: --jobs=2
+before_script:
+  - cp config/database.yml.travis config/database.yml
 script:
   - bundle exec rails db:setup
   - bundle exec rspec
